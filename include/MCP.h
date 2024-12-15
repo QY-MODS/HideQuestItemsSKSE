@@ -1,9 +1,9 @@
 #pragma once
-#include "Settings.h"
+#include "SKSEMCP/SKSEMenuFramework.hpp"
 
 void HelpMarker(const char* desc);
 
-const ImGuiTableFlags table_flags =
+constexpr ImGuiTableFlags table_flags =
     ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable;
 
 namespace MCP {

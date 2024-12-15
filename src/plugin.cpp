@@ -1,9 +1,10 @@
 #include "Events.h"
+#include "Hooks.h"
+#include "MCP.h"
+#include "Settings.h"
 
 void OnMessage(SKSE::MessagingInterface::Message* message) {
     if (message->type == SKSE::MessagingInterface::kDataLoaded) {
-        auto* eventSink = OurEventSink::GetSingleton();
-        RE::UI::GetSingleton()->AddEventSink<RE::MenuOpenCloseEvent>(eventSink);
         // MCP
         MCP::Register();
         logger::info("MCP registered.");
@@ -37,7 +38,8 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SetupLog();
     logger::info("Plugin loaded");
     SKSE::Init(skse);
-    Settings::LoadSettings();
     SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
+    Settings::LoadSettings();
+	Hooks::Install();
     return true;
 }

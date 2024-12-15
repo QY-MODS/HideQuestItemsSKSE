@@ -1,4 +1,5 @@
 #include "MCP.h"
+#include "Settings.h"
 
 void MCP::Register() {
     if (!SKSEMenuFramework::IsInstalled()) {

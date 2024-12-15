@@ -2,17 +2,16 @@
 
 void Manager::ForEachQuestItem(std::function<DevamTamam(RE::TESForm*)> a_func){
 	const auto inventory = RE::PlayerCharacter::GetSingleton()->GetInventory();
-	for (auto& item : inventory) {
-        if (!item.first) {
+	for (const auto& [fst, snd] : inventory) {
+        if (!fst) {
 			continue;
-        } else if (item.second.first <= 0) {
+        } if (snd.first <= 0) {
 			continue;
-        } else if (const auto* inv_data = item.second.second.get(); !inv_data || inv_data->IsLeveled() || inv_data->IsWorn() ||
+        } if (const auto* inv_data = snd.second.get(); !inv_data || inv_data->IsLeveled() || inv_data->IsWorn() ||
                                                              inv_data->IsFavorited() || !inv_data->IsQuestObject()) {
 			continue;
 		}
-		auto form = item.first;
-		if (a_func(form) == DevamTamam::TAMAM) {
+        if (const auto form = fst; a_func(form) == DevamTamam::TAMAM) {
 			break;
 		}
 	}
@@ -30,7 +29,7 @@ void Manager::HideQuestItems() {
             this->hidden_flags[a_form->formID] = a_form->formFlags;
 			a_form->formFlags = 13;
 		}
-		return DevamTamam::DEVAM;
+		return DEVAM;
 	});
 }
 
@@ -47,6 +46,6 @@ void Manager::ShowQuestItems() {
             a_form->formFlags = actual_flag;
 		}
         hidden_flags.erase(a_form->formID);
-		return DevamTamam::DEVAM;
+		return DEVAM;
 	});
 }

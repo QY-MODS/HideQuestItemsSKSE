@@ -11,7 +11,6 @@
 #include <filesystem>
 #include <fstream>
 #include <string>
-#include "SKSEMCP/SKSEMenuFramework.hpp"
 
 namespace Utilities {
 

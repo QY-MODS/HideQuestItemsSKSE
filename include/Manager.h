@@ -7,7 +7,7 @@ enum DevamTamam {
 };
 
 class Manager {
-    void ForEachQuestItem(std::function<DevamTamam(RE::TESForm*)> a_func);
+    static void ForEachQuestItem(std::function<DevamTamam(RE::TESForm*)> a_func);
     std::map<RE::FormID, uint32_t> hidden_flags;
 
     // mutex
@@ -21,7 +21,7 @@ public:
         return &singleton;
     }
 
-    void Init();
+    static void Init();
     void HideQuestItems();
     void ShowQuestItems();
 

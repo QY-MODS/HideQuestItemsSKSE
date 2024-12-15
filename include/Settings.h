@@ -21,6 +21,8 @@ namespace Settings {
         inline Feature container;
         inline Feature inventory;
 
+		Feature* MenuName2Feature(std::string_view menu_name);
+
 		rapidjson::Value to_json(Document::AllocatorType& a);
         void from_json(const rapidjson::Value& j);
 	};

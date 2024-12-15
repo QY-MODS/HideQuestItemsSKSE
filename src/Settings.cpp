@@ -29,7 +29,7 @@ void Settings::SaveSettings() {
         logger::error("Failed to open file for writing: {}", filename);
         return;
     }
-    ofs << buffer.GetString() << std::endl;
+    ofs << buffer.GetString() << '\n';
     ofs.close();
 }
 
@@ -68,6 +68,13 @@ void Settings::LoadDefaults() {
     Settings::Menus::container.enabled = true;
     Settings::Menus::inventory.enabled = true;
 };
+
+Feature* Settings::Menus::MenuName2Feature(const std::string_view menu_name)
+{
+	if (menu_name == RE::ContainerMenu::MENU_NAME) return &container;
+	if (menu_name == RE::InventoryMenu::MENU_NAME) return &inventory;
+	return nullptr;
+}
 
 rapidjson::Value Settings::Menus::to_json(Document::AllocatorType& a) {
     Value menus(kObjectType);
